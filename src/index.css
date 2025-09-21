@@ -1,0 +1,540 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import dashboard-specific themes */
+@import './styles/dashboard-themes.css';
+
+/* BI Portal Design System - Professional cobalt blue theme with gradients */
+
+/* Enhanced animations and transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    /* Core Background & Foreground */
+    --background: 220 13% 97%;
+    --foreground: 220 39% 11%;
+
+    /* Card System */
+    --card: 0 0% 100%;
+    --card-foreground: 220 39% 11%;
+
+    /* Popover System */
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 39% 11%;
+
+    /* Primary Cobalt Blue System */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 91% 70%;
+    --primary-dark: 217 91% 50%;
+
+    /* Secondary Professional Gray */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 39% 11%;
+
+    /* Muted System */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    /* Accent System */
+    --accent: 217 91% 95%;
+    --accent-foreground: 217 91% 30%;
+
+    /* Status Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Border & Input */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+
+    /* BI Specific Design Tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 40%) 50%, hsl(217 91% 60%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(220 13% 97%) 0%, hsl(220 13% 95%) 100%);
+    --gradient-chart: linear-gradient(45deg, hsl(217 91% 60%) 0%, hsl(142 71% 45%) 100%);
+    
+    /* Shadows for BI Components */
+    --shadow-card: 0 1px 3px 0 hsl(220 39% 11% / 0.1), 0 1px 2px -1px hsl(220 39% 11% / 0.1);
+    --shadow-chart: 0 4px 6px -1px hsl(220 39% 11% / 0.1), 0 2px 4px -2px hsl(220 39% 11% / 0.1);
+    --shadow-elevated: 0 10px 15px -3px hsl(220 39% 11% / 0.1), 0 4px 6px -4px hsl(220 39% 11% / 0.1);
+    
+    /* Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Dark Theme */
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 91% 70%;
+    --primary-dark: 217 91% 50%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 217 91% 60%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 40%) 50%, hsl(217 91% 60%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(222.2 84% 4.9%) 0%, hsl(217.2 32.6% 17.5%) 100%);
+    --gradient-chart: linear-gradient(45deg, hsl(217 91% 60%) 0%, hsl(142 71% 45%) 100%);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Light Theme (default) - already defined above */
+
+  /* Gradient Theme */
+  .gradient {
+    --background: 220 13% 97%;
+    --foreground: 220 39% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 39% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 39% 11%;
+
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 271 81% 66%;
+    --primary-dark: 271 81% 46%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 39% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 271 81% 95%;
+    --accent-foreground: 271 81% 30%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 271 81% 56%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(271 81% 56%) 0%, hsl(217 91% 60%) 50%, hsl(142 71% 45%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(271 81% 56%) 0%, hsl(217 91% 60%) 50%, hsl(142 71% 45%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(220 13% 97%) 0%, hsl(271 81% 98%) 100%);
+    --gradient-chart: linear-gradient(45deg, hsl(271 81% 56%) 0%, hsl(217 91% 60%) 50%, hsl(142 71% 45%) 100%);
+  }
+
+  /* Muted Theme */
+  .muted {
+    --background: 210 11% 96%;
+    --foreground: 210 6% 21%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 6% 21%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 6% 21%;
+
+    --primary: 210 9% 31%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 210 9% 41%;
+    --primary-dark: 210 9% 21%;
+
+    --secondary: 210 11% 93%;
+    --secondary-foreground: 210 6% 21%;
+
+    --muted: 210 11% 93%;
+    --muted-foreground: 210 6% 46%;
+
+    --accent: 210 11% 90%;
+    --accent-foreground: 210 6% 21%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 210 11% 88%;
+    --input: 210 11% 88%;
+    --ring: 210 9% 31%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(210 9% 31%) 0%, hsl(210 9% 21%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(210 9% 31%) 0%, hsl(210 6% 46%) 50%, hsl(210 9% 31%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(210 11% 96%) 0%, hsl(210 11% 93%) 100%);
+    --gradient-chart: linear-gradient(45deg, hsl(210 9% 31%) 0%, hsl(210 6% 46%) 100%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+/* BI Portal Utility Classes */
+@layer components {
+  /* Chart Container Styles */
+  .chart-container {
+    @apply bg-card rounded-xl shadow-[var(--shadow-chart)] border border-border p-6 transition-[var(--transition-smooth)] hover:shadow-[var(--shadow-elevated)];
+  }
+  
+  .chart-tile {
+    @apply bg-card rounded-lg shadow-[var(--shadow-card)] border border-border overflow-hidden transition-[var(--transition-smooth)] hover:shadow-[var(--shadow-chart)];
+  }
+  
+  /* Gradient Backgrounds */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+  
+  .bg-gradient-chart {
+    background: var(--gradient-chart);
+  }
+  
+  /* BI Dashboard Layouts */
+  .dashboard-grid {
+    @apply grid gap-6 auto-rows-min;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .kpi-card {
+    @apply bg-card rounded-xl p-6 shadow-[var(--shadow-card)] border border-border transition-[var(--transition-smooth)] hover:shadow-[var(--shadow-chart)];
+  }
+  
+  /* Animation Classes */
+  .animate-chart-enter {
+    animation: chartEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  .animate-counter {
+    animation: counterUp 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Scrollbar utilities */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Full Canvas Dashboard Styles */
+  .chart-container-wrapper {
+    @apply h-full w-full;
+  }
+
+  .react-grid-layout {
+    position: relative;
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .react-grid-item {
+    transition: all 200ms ease;
+    transition-property: left, top, width, height;
+    border-radius: 8px;
+  }
+
+  .react-grid-item.cssTransforms {
+    transition-property: transform, width, height;
+  }
+
+  .react-grid-item.react-draggable-dragging {
+    transition: none;
+    z-index: 3;
+    transform: rotate(2deg) !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .react-grid-item.react-resizable-resizing {
+    transition: none;
+    z-index: 3;
+    opacity: 0.8;
+  }
+
+  .react-grid-item > .react-resizable-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: 0;
+    right: 0;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSI2IiB2aWV3Qm94PSIwIDAgNiA2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZG90cyBmaWxsPSIjODg4IiBkPSJtMSA1IDQtNE01IDFsLTQgNE0xIDNsNC00TTMgMWwtNCA0Ii8+Cjwvc3ZnPgo=');
+    background-position: bottom right;
+    padding: 0 3px 3px 0;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    box-sizing: border-box;
+    cursor: se-resize;
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: 0 0 8px 0;
+  }
+
+  .react-grid-item:hover > .react-resizable-handle {
+    opacity: 0.6;
+  }
+
+  .react-grid-item.react-resizable-resizing > .react-resizable-handle {
+    opacity: 1;
+  }
+
+  .react-grid-placeholder {
+    background: hsl(var(--primary) / 0.1);
+    border: 2px dashed hsl(var(--primary) / 0.4);
+    border-radius: 8px;
+    opacity: 0.6;
+    transition-duration: 100ms;
+    z-index: 2;
+    user-select: none;
+    animation: pulse 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse {
+    from {
+      opacity: 0.4;
+    }
+    to {
+      opacity: 0.8;
+    }
+  }
+
+  /* Grid guidelines */
+  .react-grid-layout.show-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: calc(100% / 24) 40px;
+    background-position: 0 0;
+  }
+
+  /* Snap indicators */
+  .react-grid-item.snapping {
+    box-shadow: 0 0 0 2px hsl(var(--primary));
+  }
+}
+
+/* BI Specific Keyframes */
+@keyframes chartEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes counterUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced UI Components */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+.shadow-elevated {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-floating {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Improved button hover effects */
+.btn-primary-enhanced {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary-enhanced:hover {
+  background: linear-gradient(135deg, hsl(var(--primary-light)) 0%, hsl(var(--primary)) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+}
+
+/* Enhanced card styles */
+.card-enhanced {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-enhanced:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .mobile-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .mobile-text-sm {
+    font-size: 0.875rem;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+}
+
+/* Focus improvements for accessibility */
+.focus-enhanced:focus {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Improved scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
