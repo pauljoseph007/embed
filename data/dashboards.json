@@ -8,96 +8,7 @@
         {
           "id": "sheet-1758473870850",
           "name": "Sheet 1",
-          "tiles": [
-            {
-              "title": "Sales Performance",
-              "type": "chart",
-              "embedType": "chart",
-              "embedId": "demo-sales",
-              "srcUrl": "https://superset.example.com/explore/p/demo-sales/",
-              "layout": {
-                "x": 0,
-                "y": 0,
-                "w": 6,
-                "h": 4
-              },
-              "uiConfig": {
-                "showLegend": true,
-                "showTitle": true,
-                "backgroundColor": "transparent",
-                "borderRadius": 12,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-x2oqc84rl"
-            },
-            {
-              "title": "Revenue Trends",
-              "type": "chart",
-              "embedType": "chart",
-              "embedId": "demo-revenue",
-              "srcUrl": "https://superset.example.com/explore/p/demo-revenue/",
-              "layout": {
-                "x": 6,
-                "y": 0,
-                "w": 6,
-                "h": 4
-              },
-              "uiConfig": {
-                "showLegend": true,
-                "showTitle": true,
-                "backgroundColor": "transparent",
-                "borderRadius": 12,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-w2ez1xaic"
-            },
-            {
-              "title": "Customer Analytics",
-              "type": "chart",
-              "embedType": "chart",
-              "embedId": "demo-customers",
-              "srcUrl": "https://superset.example.com/explore/p/demo-customers/",
-              "layout": {
-                "x": 0,
-                "y": 4,
-                "w": 8,
-                "h": 3
-              },
-              "uiConfig": {
-                "showLegend": false,
-                "showTitle": true,
-                "backgroundColor": "card",
-                "borderRadius": 8,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-2my47lo2y"
-            },
-            {
-              "title": "Key Metrics",
-              "type": "dashboard",
-              "embedType": "dashboard",
-              "embedId": "demo-metrics",
-              "srcUrl": "https://superset.example.com/dashboard/demo-metrics/",
-              "layout": {
-                "x": 8,
-                "y": 4,
-                "w": 4,
-                "h": 3
-              },
-              "uiConfig": {
-                "showLegend": false,
-                "showTitle": true,
-                "backgroundColor": "transparent",
-                "borderRadius": 12,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-ig9wa526r"
-            }
-          ]
+          "tiles": []
         },
         {
           "id": "sheet-1758473870852",
@@ -129,7 +40,7 @@
         }
       ],
       "createdAt": "2025-09-21T16:57:50.850Z",
-      "lastModified": "2025-09-21T16:57:50.853Z",
+      "lastModified": "2025-09-21T18:03:23.373Z",
       "users": [
         {
           "email": "demo@sdxpartners.com",
@@ -151,7 +62,67 @@
       "isPublic": false
     }
   ],
-  "currentDashboard": null,
-  "currentSheetId": null,
+  "currentDashboard": {
+    "id": "dashboard-1758473870850",
+    "name": "Demo Dashboard",
+    "theme": "cobalt-blue",
+    "sheets": [
+      {
+        "id": "sheet-1758473870850",
+        "name": "Sheet 1",
+        "tiles": []
+      },
+      {
+        "id": "sheet-1758473870852",
+        "name": "Analytics",
+        "tiles": [
+          {
+            "title": "Marketing ROI",
+            "type": "chart",
+            "embedType": "chart",
+            "embedId": "demo-marketing",
+            "srcUrl": "https://superset.example.com/explore/p/demo-marketing/",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 12,
+              "h": 6
+            },
+            "uiConfig": {
+              "showLegend": true,
+              "showTitle": true,
+              "backgroundColor": "transparent",
+              "borderRadius": 12,
+              "theme": "cobalt-blue"
+            },
+            "demoMode": true,
+            "id": "tile-1758473870853-b296pr66n"
+          }
+        ]
+      }
+    ],
+    "createdAt": "2025-09-21T16:57:50.850Z",
+    "lastModified": "2025-09-21T18:03:23.373Z",
+    "users": [
+      {
+        "email": "demo@sdxpartners.com",
+        "password": "demo123",
+        "name": "Demo User",
+        "role": "viewer",
+        "id": "user-1758473870851-jvmu7fow6",
+        "createdAt": "2025-09-21T16:57:50.851Z"
+      },
+      {
+        "email": "test@sdxpartners.com",
+        "password": "test123",
+        "name": "Test User",
+        "role": "viewer",
+        "id": "user-1758473870851-0e6k1utc9",
+        "createdAt": "2025-09-21T16:57:50.851Z"
+      }
+    ],
+    "isPublic": false
+  },
+  "currentSheetId": "sheet-1758473870850",
   "globalDateRange": null
 }
