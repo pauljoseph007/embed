@@ -8,7 +8,31 @@
         {
           "id": "sheet-1758473870850",
           "name": "Sheet 1",
-          "tiles": []
+          "tiles": [
+            {
+              "title": "lk",
+              "type": "dashboard",
+              "embedType": "dashboard",
+              "embedId": "9aec6063-0be3-4db2-b3dc-7e0bd0d1006a",
+              "srcUrl": "https://bi.sdxpartners.com/superset/dashboard/9aec6063-0be3-4db2-b3dc-7e0bd0d1006a/",
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "w": 16,
+                "h": 9
+              },
+              "uiConfig": {
+                "showLegend": true,
+                "showTitle": true,
+                "backgroundColor": "transparent",
+                "borderRadius": 12,
+                "theme": "cobalt-blue"
+              },
+              "demoMode": false,
+              "dashboardUuid": "9aec6063-0be3-4db2-b3dc-7e0bd0d1006a",
+              "id": "tile-1758781609958-mvnazf0t8"
+            }
+          ]
         },
         {
           "id": "sheet-1758473870852",
@@ -40,7 +64,7 @@
         }
       ],
       "createdAt": "2025-09-21T16:57:50.850Z",
-      "lastModified": "2025-09-21T18:03:23.373Z",
+      "lastModified": "2025-09-26T07:06:46.176Z",
       "users": [
         {
           "email": "demo@sdxpartners.com",
@@ -57,6 +81,30 @@
           "role": "viewer",
           "id": "user-1758473870851-0e6k1utc9",
           "createdAt": "2025-09-21T16:57:50.851Z"
+        },
+        {
+          "email": "admin@sdxpartners.com",
+          "password": "admin123",
+          "name": "svfd",
+          "role": "viewer",
+          "id": "user-1758866703366-rhdrymlgw",
+          "createdAt": "2025-09-26T06:05:03.366Z"
+        },
+        {
+          "email": "paul@sdxpartners.com",
+          "password": "123456",
+          "name": "paul",
+          "role": "editor",
+          "id": "user-1758869509471-1cfab4jiy",
+          "createdAt": "2025-09-26T06:51:49.471Z"
+        },
+        {
+          "email": "paul1@sdxpartners.com",
+          "password": "admin123",
+          "name": "paul1",
+          "role": "editor",
+          "id": "user-1758870298427-3gexkzopm",
+          "createdAt": "2025-09-26T07:04:58.427Z"
         }
       ],
       "isPublic": false
@@ -70,7 +118,31 @@
       {
         "id": "sheet-1758473870850",
         "name": "Sheet 1",
-        "tiles": []
+        "tiles": [
+          {
+            "title": "lk",
+            "type": "dashboard",
+            "embedType": "dashboard",
+            "embedId": "9aec6063-0be3-4db2-b3dc-7e0bd0d1006a",
+            "srcUrl": "https://bi.sdxpartners.com/superset/dashboard/9aec6063-0be3-4db2-b3dc-7e0bd0d1006a/",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 16,
+              "h": 9
+            },
+            "uiConfig": {
+              "showLegend": true,
+              "showTitle": true,
+              "backgroundColor": "transparent",
+              "borderRadius": 12,
+              "theme": "cobalt-blue"
+            },
+            "demoMode": false,
+            "dashboardUuid": "9aec6063-0be3-4db2-b3dc-7e0bd0d1006a",
+            "id": "tile-1758781609958-mvnazf0t8"
+          }
+        ]
       },
       {
         "id": "sheet-1758473870852",
@@ -102,7 +174,7 @@
       }
     ],
     "createdAt": "2025-09-21T16:57:50.850Z",
-    "lastModified": "2025-09-21T18:03:23.373Z",
+    "lastModified": "2025-09-26T07:06:46.176Z",
     "users": [
       {
         "email": "demo@sdxpartners.com",
@@ -119,6 +191,30 @@
         "role": "viewer",
         "id": "user-1758473870851-0e6k1utc9",
         "createdAt": "2025-09-21T16:57:50.851Z"
+      },
+      {
+        "email": "admin@sdxpartners.com",
+        "password": "admin123",
+        "name": "svfd",
+        "role": "viewer",
+        "id": "user-1758866703366-rhdrymlgw",
+        "createdAt": "2025-09-26T06:05:03.366Z"
+      },
+      {
+        "email": "paul@sdxpartners.com",
+        "password": "123456",
+        "name": "paul",
+        "role": "editor",
+        "id": "user-1758869509471-1cfab4jiy",
+        "createdAt": "2025-09-26T06:51:49.471Z"
+      },
+      {
+        "email": "paul1@sdxpartners.com",
+        "password": "admin123",
+        "name": "paul1",
+        "role": "editor",
+        "id": "user-1758870298427-3gexkzopm",
+        "createdAt": "2025-09-26T07:04:58.427Z"
       }
     ],
     "isPublic": false
