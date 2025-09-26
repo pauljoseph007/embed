@@ -485,6 +485,7 @@ export const ChartTile = ({
               iframeUrl={tile.srcUrl}
               title={undefined} // Don't show title in SupersetChart since we're handling it above
               className="w-full h-full"
+              chartId={tile.id} // Pass tile ID for filter toggle persistence
               onError={(error) => {
                 console.error('Chart error:', error);
               }}

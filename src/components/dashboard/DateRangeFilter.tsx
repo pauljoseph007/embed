@@ -8,10 +8,13 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import { format, subDays, subMonths, startOfMonth, endOfMonth } from 'date-fns';
 import { DateRange } from 'react-day-picker';
+import { useDashboardStore } from '@/store/dashboardStore';
 
 interface DateRangeFilterProps {
-  onDateRangeChange: (dateRange: { from: Date; to: Date } | null) => void;
+  onDateRangeChange?: (dateRange: { from: Date; to: Date } | null) => void; // Made optional for backward compatibility
   className?: string;
+  useGlobalState?: boolean; // New prop to control global state usage
+  sheetId?: string; // Sheet ID for sheet-specific filtering
 }
 
 const PRESET_RANGES = [
@@ -25,15 +28,69 @@ const PRESET_RANGES = [
   { label: 'All time', value: 'all-time' }
 ];
 
-export const DateRangeFilter = ({ onDateRangeChange, className = '' }: DateRangeFilterProps) => {
+export const DateRangeFilter = ({
+  onDateRangeChange,
+  className = '',
+  useGlobalState = true,
+  sheetId
+}: DateRangeFilterProps) => {
+  // Sheet-specific state management
+  const { sheetDateRanges, setSheetDateRange, getSheetDateRange, currentSheetId } = useDashboardStore();
+
+  // Use provided sheetId or fall back to current sheet
+  const activeSheetId = sheetId || currentSheetId;
+  const currentDateRange = activeSheetId ? getSheetDateRange(activeSheetId) : null;
+
   const [selectedPreset, setSelectedPreset] = useState<string>('all-time');
   const [customDateRange, setCustomDateRange] = useState<DateRange | undefined>();
   const [showCustomCalendar, setShowCustomCalendar] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
+  // Initialize component state from sheet-specific state on mount
+  useEffect(() => {
+    if (useGlobalState && currentDateRange) {
+      setIsActive(true);
+      // Try to determine which preset matches the current sheet's date range
+      const preset = determinePresetFromDateRange(currentDateRange);
+      if (preset) {
+        setSelectedPreset(preset);
+      } else {
+        setSelectedPreset('custom');
+        setCustomDateRange({
+          from: currentDateRange.from,
+          to: currentDateRange.to
+        });
+      }
+    }
+  }, [currentDateRange, useGlobalState, activeSheetId]);
+
+  // Helper function to determine preset from date range
+  const determinePresetFromDateRange = (dateRange: { from: Date; to: Date }): string | null => {
+    const now = new Date();
+    const daysDiff = Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24));
+
+    // Check for common presets (with some tolerance for time differences)
+    if (daysDiff <= 8 && daysDiff >= 6) return 'last-7-days';
+    if (daysDiff <= 32 && daysDiff >= 28) return 'last-30-days';
+    if (daysDiff <= 95 && daysDiff >= 85) return 'last-3-months';
+    if (daysDiff <= 185 && daysDiff >= 175) return 'last-6-months';
+
+    // Check for month-based presets
+    const isThisMonth = dateRange.from.getMonth() === now.getMonth() &&
+                       dateRange.from.getFullYear() === now.getFullYear();
+    if (isThisMonth) return 'this-month';
+
+    const lastMonth = subMonths(now, 1);
+    const isLastMonth = dateRange.from.getMonth() === lastMonth.getMonth() &&
+                       dateRange.from.getFullYear() === lastMonth.getFullYear();
+    if (isLastMonth) return 'last-month';
+
+    return null; // Custom range
+  };
+
   const getDateRangeFromPreset = (preset: string): { from: Date; to: Date } | null => {
     const now = new Date();
-    
+
     switch (preset) {
       case 'last-7-days':
         return { from: subDays(now, 7), to: now };
@@ -45,9 +102,10 @@ export const DateRangeFilter = ({ onDateRangeChange, className = '' }: DateRange
         return { from: subMonths(now, 6), to: now };
       case 'this-month':
         return { from: startOfMonth(now), to: endOfMonth(now) };
-      case 'last-month':
+      case 'last-month': {
         const lastMonth = subMonths(now, 1);
         return { from: startOfMonth(lastMonth), to: endOfMonth(lastMonth) };
+      }
       case 'custom':
         if (customDateRange?.from && customDateRange?.to) {
           return { from: customDateRange.from, to: customDateRange.to };
@@ -59,26 +117,41 @@ export const DateRangeFilter = ({ onDateRangeChange, className = '' }: DateRange
     }
   };
 
+  // Enhanced handlers that work with both global state and callback props
   const handlePresetChange = (preset: string) => {
     setSelectedPreset(preset);
-    
+
     if (preset === 'custom') {
       setShowCustomCalendar(true);
       return;
     }
-    
+
     const dateRange = getDateRangeFromPreset(preset);
     setIsActive(preset !== 'all-time');
-    onDateRangeChange(dateRange);
+
+    // Update sheet-specific state if enabled
+    if (useGlobalState && activeSheetId) {
+      setSheetDateRange(activeSheetId, dateRange);
+    }
+
+    // Call callback for backward compatibility
+    onDateRangeChange?.(dateRange);
   };
 
   const handleCustomDateSelect = (range: DateRange | undefined) => {
     setCustomDateRange(range);
-    
+
     if (range?.from && range?.to) {
       const dateRange = { from: range.from, to: range.to };
       setIsActive(true);
-      onDateRangeChange(dateRange);
+
+      // Update sheet-specific state if enabled
+      if (useGlobalState && activeSheetId) {
+        setSheetDateRange(activeSheetId, dateRange);
+      }
+
+      // Call callback for backward compatibility
+      onDateRangeChange?.(dateRange);
       setShowCustomCalendar(false);
     }
   };
@@ -87,7 +160,14 @@ export const DateRangeFilter = ({ onDateRangeChange, className = '' }: DateRange
     setSelectedPreset('all-time');
     setCustomDateRange(undefined);
     setIsActive(false);
-    onDateRangeChange(null);
+
+    // Update sheet-specific state if enabled
+    if (useGlobalState && activeSheetId) {
+      setSheetDateRange(activeSheetId, null);
+    }
+
+    // Call callback for backward compatibility
+    onDateRangeChange?.(null);
   };
 
   const getDisplayText = () => {

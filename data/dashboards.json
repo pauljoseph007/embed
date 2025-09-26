@@ -8,112 +8,23 @@
         {
           "id": "sheet-1758473870850",
           "name": "Sheet 1",
-          "tiles": [
-            {
-              "title": "Sales Performance",
-              "type": "chart",
-              "embedType": "chart",
-              "embedId": "demo-sales",
-              "srcUrl": "https://superset.example.com/explore/p/demo-sales/",
-              "layout": {
-                "x": 0,
-                "y": 0,
-                "w": 6,
-                "h": 4
-              },
-              "uiConfig": {
-                "showLegend": true,
-                "showTitle": true,
-                "backgroundColor": "transparent",
-                "borderRadius": 12,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-x2oqc84rl"
-            },
-            {
-              "title": "Revenue Trends",
-              "type": "chart",
-              "embedType": "chart",
-              "embedId": "demo-revenue",
-              "srcUrl": "https://superset.example.com/explore/p/demo-revenue/",
-              "layout": {
-                "x": 6,
-                "y": 0,
-                "w": 6,
-                "h": 4
-              },
-              "uiConfig": {
-                "showLegend": true,
-                "showTitle": true,
-                "backgroundColor": "transparent",
-                "borderRadius": 12,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-w2ez1xaic"
-            },
-            {
-              "title": "Customer Analytics",
-              "type": "chart",
-              "embedType": "chart",
-              "embedId": "demo-customers",
-              "srcUrl": "https://superset.example.com/explore/p/demo-customers/",
-              "layout": {
-                "x": 0,
-                "y": 4,
-                "w": 8,
-                "h": 3
-              },
-              "uiConfig": {
-                "showLegend": false,
-                "showTitle": true,
-                "backgroundColor": "card",
-                "borderRadius": 8,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-2my47lo2y"
-            },
-            {
-              "title": "Key Metrics",
-              "type": "dashboard",
-              "embedType": "dashboard",
-              "embedId": "demo-metrics",
-              "srcUrl": "https://superset.example.com/dashboard/demo-metrics/",
-              "layout": {
-                "x": 8,
-                "y": 4,
-                "w": 4,
-                "h": 3
-              },
-              "uiConfig": {
-                "showLegend": false,
-                "showTitle": true,
-                "backgroundColor": "transparent",
-                "borderRadius": 12,
-                "theme": "cobalt-blue"
-              },
-              "demoMode": true,
-              "id": "tile-1758473870852-ig9wa526r"
-            }
-          ]
+          "tiles": []
         },
         {
           "id": "sheet-1758473870852",
           "name": "Analytics",
           "tiles": [
             {
-              "title": "Marketing ROI",
+              "title": "donut",
               "type": "chart",
               "embedType": "chart",
-              "embedId": "demo-marketing",
-              "srcUrl": "https://superset.example.com/explore/p/demo-marketing/",
+              "embedId": "venaw02VQ7m",
+              "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
               "layout": {
                 "x": 0,
                 "y": 0,
-                "w": 12,
-                "h": 6
+                "w": 8,
+                "h": 9
               },
               "uiConfig": {
                 "showLegend": true,
@@ -122,14 +33,113 @@
                 "borderRadius": 12,
                 "theme": "cobalt-blue"
               },
-              "demoMode": true,
-              "id": "tile-1758473870853-b296pr66n"
+              "demoMode": false,
+              "id": "tile-1758792462870-undvl52s8"
+            },
+            {
+              "title": "donut 2",
+              "type": "chart",
+              "embedType": "chart",
+              "embedId": "venaw02VQ7m",
+              "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
+              "layout": {
+                "x": 0,
+                "y": 9,
+                "w": 8,
+                "h": 9
+              },
+              "uiConfig": {
+                "showLegend": true,
+                "showTitle": true,
+                "backgroundColor": "transparent",
+                "borderRadius": 12,
+                "theme": "cobalt-blue",
+                "titleSize": "medium",
+                "titleColor": "default",
+                "showBorder": false,
+                "borderColor": "default",
+                "padding": 16,
+                "opacity": 100,
+                "shadow": "none",
+                "fontSize": "medium",
+                "fontWeight": "normal",
+                "textAlign": "left",
+                "textColor": "default",
+                "shapeColor": "primary",
+                "strokeColor": "primary",
+                "strokeWidth": 2
+              },
+              "demoMode": false,
+              "id": "tile-1758792796932-pq54jfg3q"
+            },
+            {
+              "title": "donut 3",
+              "type": "chart",
+              "embedType": "chart",
+              "embedId": "venaw02VQ7m",
+              "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
+              "layout": {
+                "x": 8,
+                "y": 0,
+                "w": 8,
+                "h": 9
+              },
+              "uiConfig": {
+                "showLegend": true,
+                "showTitle": true,
+                "backgroundColor": "transparent",
+                "borderRadius": 12,
+                "theme": "cobalt-blue",
+                "titleSize": "medium",
+                "titleColor": "default",
+                "showBorder": false,
+                "borderColor": "default",
+                "padding": 16,
+                "opacity": 100,
+                "shadow": "none",
+                "fontSize": "medium",
+                "fontWeight": "normal",
+                "textAlign": "left",
+                "textColor": "default",
+                "shapeColor": "primary",
+                "strokeColor": "primary",
+                "strokeWidth": 2
+              },
+              "demoMode": false,
+              "id": "tile-1758792823985-914xu56jx"
+            },
+            {
+              "title": "donut 4",
+              "type": "chart",
+              "embedType": "chart",
+              "embedId": "venaw02VQ7m",
+              "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
+              "layout": {
+                "x": 8,
+                "y": 9,
+                "w": 8,
+                "h": 9
+              },
+              "uiConfig": {
+                "showLegend": true,
+                "showTitle": true,
+                "backgroundColor": "transparent",
+                "borderRadius": 12,
+                "theme": "cobalt-blue"
+              },
+              "demoMode": false,
+              "id": "tile-1758792868386-t7suoxn7j"
             }
           ]
+        },
+        {
+          "id": "sheet-1758803348653",
+          "name": "Sheet 3",
+          "tiles": []
         }
       ],
       "createdAt": "2025-09-21T16:57:50.850Z",
-      "lastModified": "2025-09-21T16:57:50.853Z",
+      "lastModified": "2025-09-25T17:40:12.673Z",
       "users": [
         {
           "email": "demo@sdxpartners.com",
@@ -146,12 +156,222 @@
           "role": "viewer",
           "id": "user-1758473870851-0e6k1utc9",
           "createdAt": "2025-09-21T16:57:50.851Z"
+        },
+        {
+          "email": "sara@company.com",
+          "password": "121212",
+          "name": "sara",
+          "role": "viewer",
+          "id": "user-1758800454422-er8f88ojj",
+          "createdAt": "2025-09-25T11:40:54.422Z"
+        },
+        {
+          "email": "user@sdxpartners.com",
+          "password": "121212",
+          "name": "user",
+          "role": "viewer",
+          "id": "user-1758800609036-9wjm3ih8s",
+          "createdAt": "2025-09-25T11:43:29.036Z"
+        },
+        {
+          "email": "John@company.com",
+          "password": "121212",
+          "name": "John",
+          "role": "viewer",
+          "id": "user-1758800701950-ixemub184",
+          "createdAt": "2025-09-25T11:45:01.950Z"
         }
       ],
       "isPublic": false
     }
   ],
-  "currentDashboard": null,
-  "currentSheetId": null,
-  "globalDateRange": null
+  "currentDashboard": {
+    "id": "dashboard-1758473870850",
+    "name": "Demo Dashboard",
+    "theme": "cobalt-blue",
+    "sheets": [
+      {
+        "id": "sheet-1758473870850",
+        "name": "Sheet 1",
+        "tiles": []
+      },
+      {
+        "id": "sheet-1758473870852",
+        "name": "Analytics",
+        "tiles": [
+          {
+            "title": "donut",
+            "type": "chart",
+            "embedType": "chart",
+            "embedId": "venaw02VQ7m",
+            "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 8,
+              "h": 9
+            },
+            "uiConfig": {
+              "showLegend": true,
+              "showTitle": true,
+              "backgroundColor": "transparent",
+              "borderRadius": 12,
+              "theme": "cobalt-blue"
+            },
+            "demoMode": false,
+            "id": "tile-1758792462870-undvl52s8"
+          },
+          {
+            "title": "donut 2",
+            "type": "chart",
+            "embedType": "chart",
+            "embedId": "venaw02VQ7m",
+            "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
+            "layout": {
+              "x": 0,
+              "y": 9,
+              "w": 8,
+              "h": 9
+            },
+            "uiConfig": {
+              "showLegend": true,
+              "showTitle": true,
+              "backgroundColor": "transparent",
+              "borderRadius": 12,
+              "theme": "cobalt-blue",
+              "titleSize": "medium",
+              "titleColor": "default",
+              "showBorder": false,
+              "borderColor": "default",
+              "padding": 16,
+              "opacity": 100,
+              "shadow": "none",
+              "fontSize": "medium",
+              "fontWeight": "normal",
+              "textAlign": "left",
+              "textColor": "default",
+              "shapeColor": "primary",
+              "strokeColor": "primary",
+              "strokeWidth": 2
+            },
+            "demoMode": false,
+            "id": "tile-1758792796932-pq54jfg3q"
+          },
+          {
+            "title": "donut 3",
+            "type": "chart",
+            "embedType": "chart",
+            "embedId": "venaw02VQ7m",
+            "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
+            "layout": {
+              "x": 8,
+              "y": 0,
+              "w": 8,
+              "h": 9
+            },
+            "uiConfig": {
+              "showLegend": true,
+              "showTitle": true,
+              "backgroundColor": "transparent",
+              "borderRadius": 12,
+              "theme": "cobalt-blue",
+              "titleSize": "medium",
+              "titleColor": "default",
+              "showBorder": false,
+              "borderColor": "default",
+              "padding": 16,
+              "opacity": 100,
+              "shadow": "none",
+              "fontSize": "medium",
+              "fontWeight": "normal",
+              "textAlign": "left",
+              "textColor": "default",
+              "shapeColor": "primary",
+              "strokeColor": "primary",
+              "strokeWidth": 2
+            },
+            "demoMode": false,
+            "id": "tile-1758792823985-914xu56jx"
+          },
+          {
+            "title": "donut 4",
+            "type": "chart",
+            "embedType": "chart",
+            "embedId": "venaw02VQ7m",
+            "srcUrl": "https://bi.sdxpartners.com/superset/explore/p/venaw02VQ7m/?standalone=1&height=400",
+            "layout": {
+              "x": 8,
+              "y": 9,
+              "w": 8,
+              "h": 9
+            },
+            "uiConfig": {
+              "showLegend": true,
+              "showTitle": true,
+              "backgroundColor": "transparent",
+              "borderRadius": 12,
+              "theme": "cobalt-blue"
+            },
+            "demoMode": false,
+            "id": "tile-1758792868386-t7suoxn7j"
+          }
+        ]
+      },
+      {
+        "id": "sheet-1758803348653",
+        "name": "Sheet 3",
+        "tiles": []
+      }
+    ],
+    "createdAt": "2025-09-21T16:57:50.850Z",
+    "lastModified": "2025-09-25T17:40:12.673Z",
+    "users": [
+      {
+        "email": "demo@sdxpartners.com",
+        "password": "demo123",
+        "name": "Demo User",
+        "role": "viewer",
+        "id": "user-1758473870851-jvmu7fow6",
+        "createdAt": "2025-09-21T16:57:50.851Z"
+      },
+      {
+        "email": "test@sdxpartners.com",
+        "password": "test123",
+        "name": "Test User",
+        "role": "viewer",
+        "id": "user-1758473870851-0e6k1utc9",
+        "createdAt": "2025-09-21T16:57:50.851Z"
+      },
+      {
+        "email": "sara@company.com",
+        "password": "121212",
+        "name": "sara",
+        "role": "viewer",
+        "id": "user-1758800454422-er8f88ojj",
+        "createdAt": "2025-09-25T11:40:54.422Z"
+      },
+      {
+        "email": "user@sdxpartners.com",
+        "password": "121212",
+        "name": "user",
+        "role": "viewer",
+        "id": "user-1758800609036-9wjm3ih8s",
+        "createdAt": "2025-09-25T11:43:29.036Z"
+      },
+      {
+        "email": "John@company.com",
+        "password": "121212",
+        "name": "John",
+        "role": "viewer",
+        "id": "user-1758800701950-ixemub184",
+        "createdAt": "2025-09-25T11:45:01.950Z"
+      }
+    ],
+    "isPublic": false
+  },
+  "currentSheetId": "sheet-1758803348653",
+  "globalDateRange": {
+    "from": "2025-06-02T18:30:00.000Z",
+    "to": "2025-07-22T18:30:00.000Z"
+  }
 }

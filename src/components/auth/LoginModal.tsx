@@ -35,7 +35,7 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!loginEmail || !loginPassword) {
       toast({
         title: "Validation Error",
@@ -45,26 +45,55 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
       return;
     }
 
-    const result = await loginToDashboard(loginEmail, loginPassword);
-    if (result.success && result.user) {
-      toast({
-        title: "Welcome back!",
-        description: `You have been successfully logged in as ${result.user.role}.`
-      });
-      onClose();
+    console.log('🚀 Login form submitted:', { email: loginEmail, timestamp: new Date().toISOString() });
 
-      // Redirect based on user role
-      if (result.user.role === 'admin') {
-        // Admin users go to admin builder
-        window.location.href = '/admin';
+    try {
+      const result = await loginToDashboard(loginEmail, loginPassword);
+
+      console.log('📋 Login result received:', {
+        success: result.success,
+        hasUser: !!result.user,
+        error: result.error,
+        userRole: result.user?.role
+      });
+
+      if (result.success && result.user) {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('✅ Login successful, showing success toast');
+        }
+        toast({
+          title: "Welcome back!",
+          description: `You have been successfully logged in as ${result.user.role}.`
+        });
+        onClose();
+
+        // Redirect based on user role
+        if (result.user.role === 'admin') {
+          if (process.env.NODE_ENV === 'development') {
+            console.log('🔄 Redirecting admin to /admin');
+          }
+          window.location.href = '/admin';
+        } else {
+          if (process.env.NODE_ENV === 'development') {
+            console.log('🔄 Redirecting user to /user-dashboards');
+          }
+          window.location.href = '/user-dashboards';
+        }
       } else {
-        // Regular users go to their dashboard list
-        window.location.href = '/user-dashboards';
+        if (process.env.NODE_ENV === 'development') {
+          console.error('❌ Login failed:', result.error);
+        }
+        toast({
+          title: "Login Failed",
+          description: result.error || "Invalid email or password.",
+          variant: "destructive"
+        });
       }
-    } else {
+    } catch (error) {
+      console.error('💥 Login form error:', error);
       toast({
-        title: "Login Failed",
-        description: "Invalid email or password.",
+        title: "Login Error",
+        description: "An unexpected error occurred. Please try again.",
         variant: "destructive"
       });
     }

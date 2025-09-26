@@ -277,12 +277,18 @@ export const DashboardBuilder = ({ dashboard }: DashboardBuilderProps) => {
           disabled={!isAdmin || isPreviewMode} // Disable for non-admin users
         />
 
-        {/* Global Date Range Filter */}
+        {/* Sheet-Specific Date Range Filter - Enhanced with RECORDDATE support */}
         <div className="px-4 py-2 bg-card/50 border-b border-border/50">
-          <DateRangeFilter
-            onDateRangeChange={setGlobalDateRange}
-            className="justify-center"
-          />
+          <div className="flex items-center justify-center gap-2">
+            <div className="text-xs text-muted-foreground bg-primary/10 px-2 py-1 rounded-md">
+              🗓️ Sheet-Specific RECORDDATE Filter
+            </div>
+            <DateRangeFilter
+              useGlobalState={true}
+              sheetId={currentSheet?.id}
+              className="justify-center"
+            />
+          </div>
         </div>
 
         {/* Full-Screen Canvas */}
@@ -321,40 +327,43 @@ export const DashboardBuilder = ({ dashboard }: DashboardBuilderProps) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="w-full p-4" style={{ minHeight: 'calc(100vh - 200px)' }}>
-                    <ResponsiveGridLayout
-                      className={`layout ${showGrid ? 'show-grid' : ''}`}
-                      layouts={{ lg: gridLayouts }}
-                      breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                      cols={{ lg: 24, md: 20, sm: 12, xs: 8, xxs: 4 }}
-                      rowHeight={40}
-                      isDraggable={isAdmin && !isPreviewMode} // Disable dragging for non-admin users
-                      isResizable={isAdmin && !isPreviewMode} // Disable resizing for non-admin users
-                      onLayoutChange={handleLayoutChange}
-                      onDragStart={handleDragStart}
-                      onDragStop={handleDragStop}
-                      onResizeStart={handleResizeStart}
-                      onResizeStop={handleResizeStop}
-                      margin={[12, 12]}
-                      containerPadding={[16, 16]}
-                      useCSSTransforms={true}
-                      preventCollision={false}
-                      compactType="vertical"
-                      autoSize={false}
-                    >
-                      {currentSheet.tiles.map((tile) => (
-                        <div key={tile.id} className="chart-container-wrapper">
-                          <ChartTile
-                            tile={tile}
-                            isPreviewMode={!isAdmin || isPreviewMode} // Force preview mode for non-admin users
-                            isSelected={isAdmin && selectedTileId === tile.id} // Disable selection for non-admin users
-                            onSelect={isAdmin ? () => setSelectedTileId(tile.id) : undefined} // Disable selection for non-admin users
-                            onDelete={isAdmin ? () => handleDeleteTile(tile.id) : undefined} // Disable deletion for non-admin users
-                            theme={dashboard.theme}
-                          />
-                        </div>
-                      ))}
-                    </ResponsiveGridLayout>
+                  <div className="w-full p-4 overflow-x-auto overflow-y-auto" style={{ minHeight: 'calc(100vh - 200px)', minWidth: 'fit-content' }}>
+                    <div style={{ minWidth: '1200px' }}>
+                      <ResponsiveGridLayout
+                        className={`layout ${showGrid ? 'show-grid' : ''}`}
+                        layouts={{ lg: gridLayouts }}
+                        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+                        cols={{ lg: 24, md: 20, sm: 12, xs: 8, xxs: 4 }}
+                        rowHeight={40}
+                        isDraggable={isAdmin && !isPreviewMode} // Disable dragging for non-admin users
+                        isResizable={isAdmin && !isPreviewMode} // Disable resizing for non-admin users
+                        onLayoutChange={handleLayoutChange}
+                        onDragStart={handleDragStart}
+                        onDragStop={handleDragStop}
+                        onResizeStart={handleResizeStart}
+                        onResizeStop={handleResizeStop}
+                        margin={[12, 12]}
+                        containerPadding={[16, 16]}
+                        useCSSTransforms={true}
+                        preventCollision={false}
+                        compactType="vertical"
+                        autoSize={false}
+                        width={1200} // Set a fixed width to enable horizontal scrolling
+                      >
+                        {currentSheet.tiles.map((tile) => (
+                          <div key={tile.id} className="chart-container-wrapper">
+                            <ChartTile
+                              tile={tile}
+                              isPreviewMode={!isAdmin || isPreviewMode} // Force preview mode for non-admin users
+                              isSelected={isAdmin && selectedTileId === tile.id} // Disable selection for non-admin users
+                              onSelect={isAdmin ? () => setSelectedTileId(tile.id) : undefined} // Disable selection for non-admin users
+                              onDelete={isAdmin ? () => handleDeleteTile(tile.id) : undefined} // Disable deletion for non-admin users
+                              theme={dashboard.theme}
+                            />
+                          </div>
+                        ))}
+                      </ResponsiveGridLayout>
+                    </div>
                   </div>
                 )}
               </motion.div>

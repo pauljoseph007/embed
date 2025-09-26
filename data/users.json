@@ -8,7 +8,7 @@
       "role": "admin",
       "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face",
       "createdAt": "2024-01-01T00:00:00Z",
-      "lastLogin": "2025-09-21T15:47:35.032Z"
+      "lastLogin": "2025-09-25T17:25:26.221Z"
     },
     {
       "id": "user-1",
@@ -18,7 +18,7 @@
       "role": "user",
       "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face",
       "createdAt": "2024-01-01T00:00:00Z",
-      "lastLogin": "2025-09-21T15:09:01.017Z"
+      "lastLogin": "2025-09-25T12:13:48.568Z"
     },
     {
       "id": "viewer-1",
@@ -49,6 +49,16 @@
       "role": "admin",
       "createdAt": "2025-09-21T14:08:25.187Z",
       "lastLogin": "2025-09-21T14:08:25.189Z"
+    },
+    {
+      "id": "admin-1758801361693",
+      "email": "sowmithra@sdxpartners.com",
+      "password": "121212",
+      "name": "Sowmithra",
+      "role": "admin",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face",
+      "createdAt": "2025-09-25T11:56:01.693Z",
+      "lastLogin": "2025-09-25T11:56:30.927Z"
     }
   ],
   "sessions": {
@@ -111,6 +121,150 @@
       "email": "sara@sdxpartners.com",
       "loginTime": "2025-09-21T16:36:37.521Z",
       "expiresAt": "2025-09-22T16:36:37.521Z"
+    },
+    "session-1758728614379-9a7d7bs84": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-24T15:43:34.379Z",
+      "expiresAt": "2025-09-25T15:43:34.379Z"
+    },
+    "session-1758732388931-0woir8gb4": {
+      "userId": "user-1",
+      "email": "user@sdxpartners.com",
+      "loginTime": "2025-09-24T16:46:28.931Z",
+      "expiresAt": "2025-09-25T16:46:28.931Z"
+    },
+    "session-1758732401700-pw5crs9vk": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-24T16:46:41.701Z",
+      "expiresAt": "2025-09-25T16:46:41.701Z"
+    },
+    "session-1758778847721-5fi7rqrc8": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T05:40:47.721Z",
+      "expiresAt": "2025-09-26T05:40:47.721Z"
+    },
+    "session-1758780597682-8aspjpqqx": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T06:09:57.682Z",
+      "expiresAt": "2025-09-26T06:09:57.682Z"
+    },
+    "session-1758782867691-iy4rcjc10": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T06:47:47.691Z",
+      "expiresAt": "2025-09-26T06:47:47.691Z"
+    },
+    "session-1758786339414-88n7smm0p": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T07:45:39.414Z",
+      "expiresAt": "2025-09-26T07:45:39.414Z"
+    },
+    "session-1758786661540-pt3ajesl3": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T07:51:01.540Z",
+      "expiresAt": "2025-09-26T07:51:01.540Z"
+    },
+    "session-1758787437027-z982ydnh5": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T08:03:57.027Z",
+      "expiresAt": "2025-09-26T08:03:57.027Z"
+    },
+    "session-1758788782645-s0nivvalf": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T08:26:22.645Z",
+      "expiresAt": "2025-09-26T08:26:22.645Z"
+    },
+    "session-1758792431567-vstozx1b3": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T09:27:11.567Z",
+      "expiresAt": "2025-09-26T09:27:11.567Z"
+    },
+    "session-1758793780286-hceyioyay": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T09:49:40.286Z",
+      "expiresAt": "2025-09-26T09:49:40.286Z"
+    },
+    "session-1758797648116-hix0e1lji": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T10:54:08.116Z",
+      "expiresAt": "2025-09-26T10:54:08.116Z"
+    },
+    "session-1758800918944-8cqywrr7g": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T11:48:38.944Z",
+      "expiresAt": "2025-09-26T11:48:38.944Z"
+    },
+    "session-1758801833646-a2kqqwdxp": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T12:03:53.646Z",
+      "expiresAt": "2025-09-26T12:03:53.646Z"
+    },
+    "session-1758801833657-6djniktg7": {
+      "userId": "user-1758800454422-er8f88ojj",
+      "email": "sara@company.com",
+      "loginTime": "2025-09-25T12:03:53.657Z",
+      "expiresAt": "2025-09-26T12:03:53.657Z"
+    },
+    "session-1758801833664-v2dl3tqu5": {
+      "userId": "user-1758800701950-ixemub184",
+      "email": "John@company.com",
+      "loginTime": "2025-09-25T12:03:53.664Z",
+      "expiresAt": "2025-09-26T12:03:53.664Z"
+    },
+    "session-1758801833669-nf4q3hqey": {
+      "userId": "user-1758473870851-jvmu7fow6",
+      "email": "demo@sdxpartners.com",
+      "loginTime": "2025-09-25T12:03:53.669Z",
+      "expiresAt": "2025-09-26T12:03:53.669Z"
+    },
+    "session-1758802066114-3mye3kcif": {
+      "userId": "user-1758800454422-er8f88ojj",
+      "email": "sara@company.com",
+      "loginTime": "2025-09-25T12:07:46.114Z",
+      "expiresAt": "2025-09-26T12:07:46.114Z"
+    },
+    "session-1758802066125-qqadszob2": {
+      "userId": "user-1758800701950-ixemub184",
+      "email": "John@company.com",
+      "loginTime": "2025-09-25T12:07:46.125Z",
+      "expiresAt": "2025-09-26T12:07:46.125Z"
+    },
+    "session-1758802066134-o40jeu2xd": {
+      "userId": "user-1758473870851-jvmu7fow6",
+      "email": "demo@sdxpartners.com",
+      "loginTime": "2025-09-25T12:07:46.134Z",
+      "expiresAt": "2025-09-26T12:07:46.134Z"
+    },
+    "session-1758802066142-6fckm3xoi": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T12:07:46.142Z",
+      "expiresAt": "2025-09-26T12:07:46.142Z"
+    },
+    "session-1758818207507-l77hfw20g": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T16:36:47.507Z",
+      "expiresAt": "2025-09-26T16:36:47.508Z"
+    },
+    "session-1758821126220-2ty4itftl": {
+      "userId": "admin-1",
+      "email": "admin@sdxpartners.com",
+      "loginTime": "2025-09-25T17:25:26.220Z",
+      "expiresAt": "2025-09-26T17:25:26.220Z"
     }
   }
 }

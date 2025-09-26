@@ -1,42 +1,48 @@
 // File-based storage service that communicates with the backend
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+import { apiClient, ApiResponse, handleApiError } from '@/utils/apiClient';
 
-export interface ApiResponse<T = any> {
-  success: boolean;
-  data?: T;
+// Legacy interface for backward compatibility
+export interface LegacyApiResponse<T = any> extends ApiResponse<T> {
   user?: T;
   users?: T;
   dashboard?: T;
   dashboards?: T;
   session?: T;
-  error?: string;
-  message?: string;
 }
 
 class StorageService {
+  // Use the centralized API client with retry logic and better error handling
   private async makeRequest<T>(
-    endpoint: string, 
+    endpoint: string,
     options: RequestInit = {}
-  ): Promise<ApiResponse<T>> {
+  ): Promise<LegacyApiResponse<T>> {
     try {
-      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          ...options.headers,
-        },
-        ...options,
-      });
+      const method = options.method || 'GET';
+      const body = options.body ? JSON.parse(options.body as string) : undefined;
 
-      const data = await response.json();
+      let response: ApiResponse<T>;
 
-      if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+      switch (method.toLowerCase()) {
+        case 'post':
+          response = await apiClient.post<T>(endpoint, body);
+          break;
+        case 'put':
+          response = await apiClient.put<T>(endpoint, body);
+          break;
+        case 'delete':
+          response = await apiClient.delete<T>(endpoint);
+          break;
+        case 'patch':
+          response = await apiClient.patch<T>(endpoint, body);
+          break;
+        default:
+          response = await apiClient.get<T>(endpoint);
       }
 
-      return data;
+      return response as LegacyApiResponse<T>;
     } catch (error) {
       console.error(`Storage service error for ${endpoint}:`, error);
-      throw error;
+      throw new Error(handleApiError(error));
     }
   }
 

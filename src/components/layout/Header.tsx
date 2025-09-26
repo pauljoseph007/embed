@@ -41,6 +41,9 @@ const Header = () => {
               <a href="#analytics" className="text-muted-foreground hover:text-foreground transition-colors">
                 Analytics
               </a>
+              <Link to="/proposal-form" className="text-muted-foreground hover:text-foreground transition-colors">
+                Proposal Form
+              </Link>
             </nav>
           )}
 
@@ -56,7 +59,6 @@ const Header = () => {
                 <UserProfile />
               </>
             ) : (
-              // Remove authentication buttons from homepage as requested
               <div></div>
             )}
           </div>
@@ -99,6 +101,13 @@ const Header = () => {
                     >
                       Analytics
                     </a>
+                    <Link
+                      to="/proposal-form"
+                      className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Proposal Form
+                    </Link>
 
                     <hr className="border-border" />
                   </>
@@ -113,7 +122,6 @@ const Header = () => {
                     </div>
                   </>
                 ) : (
-                  // Remove authentication buttons from mobile menu as well
                   <div></div>
                 )}
               </div>

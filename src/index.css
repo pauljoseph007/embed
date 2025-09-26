@@ -1,9 +1,9 @@
+/* Import dashboard-specific themes - must come first */
+@import './styles/dashboard-themes.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import dashboard-specific themes */
-@import './styles/dashboard-themes.css';
 
 /* BI Portal Design System - Professional cobalt blue theme with gradients */
 

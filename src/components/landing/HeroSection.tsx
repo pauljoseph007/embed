@@ -53,26 +53,17 @@ const HeroSection = () => {
             Power BI-style dashboards with drag-and-drop simplicity
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Button */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-20"
+            className="flex justify-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Button
               size="lg"
-              variant="secondary"
-              className="text-lg px-8 py-4 bg-white text-primary hover:bg-white/90"
-              onClick={() => setShowLoginModal(true)}
-            >
-              <BarChart3 className="mr-2 h-5 w-5" />
-              Start Building Dashboards
-            </Button>
-            <Button
-              size="lg"
               variant="outline"
-              className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary bg-transparent"
+              className="text-lg px-12 py-4 border-white text-white hover:bg-white hover:text-primary bg-transparent"
               onClick={() => setShowLoginModal(true)}
             >
               <LogIn className="mr-2 h-5 w-5" />

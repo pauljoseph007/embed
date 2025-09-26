@@ -96,11 +96,11 @@ export function parseSuperset(input: string): ParsedEmbed {
 
     // Enhanced chart patterns
     const chartPatterns = [
-      /\/explore\/p\/([^\/\?]+)/,           // /explore/p/<id>
-      /\/superset\/explore\/p\/([^\/\?]+)/, // /superset/explore/p/<id>
-      /\/explore\/([^\/\?]+)/,              // /explore/<id>
-      /\/chart\/([^\/\?]+)/,                // /chart/<id>
-      /\/embedded\/([^\/\?]+)/              // /embedded/<id>
+      /\/explore\/p\/([^/?]+)/,           // /explore/p/<id>
+      /\/superset\/explore\/p\/([^/?]+)/, // /superset/explore/p/<id>
+      /\/explore\/([^/?]+)/,              // /explore/<id>
+      /\/chart\/([^/?]+)/,                // /chart/<id>
+      /\/embedded\/([^/?]+)/              // /embedded/<id>
     ];
 
     for (const pattern of chartPatterns) {
@@ -117,10 +117,10 @@ export function parseSuperset(input: string): ParsedEmbed {
 
     // Enhanced dashboard patterns
     const dashboardPatterns = [
-      /\/dashboard\/([^\/\?]+)/,              // /dashboard/<id>
-      /\/superset\/dashboard\/([^\/\?]+)/,    // /superset/dashboard/<id>
-      /\/dashboards\/([^\/\?]+)/,             // /dashboards/<id>
-      /\/d\/([^\/\?]+)/                       // /d/<id>
+      /\/dashboard\/([^/?]+)/,              // /dashboard/<id>
+      /\/superset\/dashboard\/([^/?]+)/,    // /superset/dashboard/<id>
+      /\/dashboards\/([^/?]+)/,             // /dashboards/<id>
+      /\/d\/([^/?]+)/                       // /d/<id>
     ];
 
     for (const pattern of dashboardPatterns) {
@@ -291,42 +291,158 @@ function createFallbackIframe(srcUrl: string): string {
   </iframe>`;
 }
 
-// Add date range parameters to Superset URL
-export function addDateRangeToUrl(url: string, dateRange: { from: Date; to: Date } | null): string {
+
+
+
+
+
+
+
+
+// Enhanced filtering approach with multiple fallback methods for better compatibility
+export function addDateRangeToUrlAlternative(url: string, dateRange: { from: Date; to: Date } | null, method: 'simple' = 'simple'): string {
   if (!dateRange || !url) return url;
 
   try {
     const urlObj = new URL(url);
 
-    // Format dates for Superset (ISO format)
-    const fromDate = dateRange.from.toISOString().split('T')[0];
-    const toDate = dateRange.to.toISOString().split('T')[0];
+    // Basic date validation
+    if (!dateRange.from || !dateRange.to || isNaN(dateRange.from.getTime()) || isNaN(dateRange.to.getTime())) {
+      console.error('❌ Invalid date range provided');
+      return url;
+    }
 
-    // Add date range parameters for Superset filtering
-    // These parameters work with Superset's native date filtering
-    urlObj.searchParams.set('time_range_start', fromDate);
-    urlObj.searchParams.set('time_range_end', toDate);
-    urlObj.searchParams.set('time_range', `${fromDate} : ${toDate}`);
+    const fromDateObj = dateRange.from;
+    const toDateObj = dateRange.to;
 
-    // Also add as extra filters for more comprehensive filtering
-    const extraFilters = JSON.stringify([
-      {
-        col: '__time_range',
-        op: 'DATETIME_RANGE',
-        val: `${fromDate} : ${toDate}`
-      }
-    ]);
-    urlObj.searchParams.set('extra_filters', extraFilters);
+    const fromDate = fromDateObj.toISOString().split('T')[0];
+    const toDate = toDateObj.toISOString().split('T')[0];
+    const standardDateFormat = `${fromDate} : ${toDate}`;
 
-    console.log('Added date range to URL:', {
-      original: url,
-      modified: urlObj.toString(),
-      dateRange: { fromDate, toDate }
+    // Clear existing parameters
+    urlObj.searchParams.delete('extra_filters');
+    urlObj.searchParams.delete('form_data');
+    urlObj.searchParams.delete('time_range');
+    urlObj.searchParams.delete('time_range_start');
+    urlObj.searchParams.delete('time_range_end');
+
+    console.log(`🔄 ALTERNATIVE FILTERING METHOD: ${method.toUpperCase()}`, {
+      dateRange: standardDateFormat,
+      method: method
     });
 
-    return urlObj.toString();
+    switch (method) {
+      case 'simple': {
+        // Enhanced simple approach with multiple filter strategies
+        const existingFormData = urlObj.searchParams.get('form_data');
+        let formData: Record<string, unknown> = {};
+
+        if (existingFormData) {
+          try {
+            formData = JSON.parse(decodeURIComponent(existingFormData));
+            console.log('📋 Existing form_data parsed:', formData);
+          } catch (e) {
+            console.warn('Could not parse existing form_data, starting fresh:', e);
+          }
+        }
+
+        // Initialize adhoc_filters if not present
+        formData.adhoc_filters = formData.adhoc_filters || [];
+
+        // Remove any existing RECORDDATE filters to avoid conflicts
+        const originalFilterCount = formData.adhoc_filters.length;
+        formData.adhoc_filters = formData.adhoc_filters.filter((f: Record<string, unknown>) =>
+          f.subject !== 'RECORDDATE' &&
+          f.subject !== 'recorddate' &&
+          f.subject !== 'RecordDate'
+        );
+
+        console.log(`🧹 Cleaned ${originalFilterCount - formData.adhoc_filters.length} existing date filters`);
+
+        // Strategy 1: Standard RECORDDATE filters with >= and <= operators
+        const dateFilters = [
+          {
+            clause: 'WHERE',
+            subject: 'RECORDDATE',
+            operator: '>=',
+            comparator: fromDate,
+            expressionType: 'SIMPLE'
+          },
+          {
+            clause: 'WHERE',
+            subject: 'RECORDDATE',
+            operator: '<=',
+            comparator: toDate,
+            expressionType: 'SIMPLE'
+          }
+        ];
+
+        formData.adhoc_filters.push(...dateFilters);
+
+        // Strategy 2: Add time range parameters as backup
+        formData.time_range = standardDateFormat;
+        formData.time_range_start = fromDate;
+        formData.time_range_end = toDate;
+
+        // Strategy 3: Force cache refresh and ensure fresh data
+        formData.force = true;
+        formData.cache_timeout = 0;
+        formData.refresh = Date.now();
+
+        // Strategy 4: Add extra filters as additional backup
+        const extraFilters = JSON.stringify([
+          {
+            col: 'RECORDDATE',
+            op: '>=',
+            val: fromDate
+          },
+          {
+            col: 'RECORDDATE',
+            op: '<=',
+            val: toDate
+          }
+        ]);
+
+        // Apply all parameters
+        urlObj.searchParams.set('form_data', encodeURIComponent(JSON.stringify(formData)));
+        urlObj.searchParams.set('extra_filters', encodeURIComponent(extraFilters));
+        urlObj.searchParams.set('time_range', standardDateFormat);
+        urlObj.searchParams.set('time_range_start', fromDate);
+        urlObj.searchParams.set('time_range_end', toDate);
+        urlObj.searchParams.set('force', `enhanced_${fromDate}_${toDate}_${Date.now()}`);
+        urlObj.searchParams.set('cache_timeout', '0');
+        urlObj.searchParams.set('standalone', '1');
+        urlObj.searchParams.set('refresh', Date.now().toString());
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log('✅ ENHANCED SIMPLE method applied with multiple strategies:', {
+            primaryFilters: formData.adhoc_filters.filter((f: Record<string, unknown>) => f.subject === 'RECORDDATE'),
+            timeRange: standardDateFormat,
+            extraFilters: extraFilters,
+            dateRange: { fromDate, toDate },
+            totalFilters: formData.adhoc_filters.length
+          });
+        }
+        break;
+      }
+    }
+
+    urlObj.searchParams.set('standalone', '1');
+    urlObj.searchParams.set('debug_method', method);
+
+    const result = urlObj.toString();
+
+    // Log the successful filter application
+    console.log('✅ Simple filter applied successfully:', {
+      method,
+      originalUrl: url,
+      filteredUrl: result,
+      dateRange: { from: fromDateObj.toLocaleDateString(), to: toDateObj.toLocaleDateString() }
+    });
+
+    return result;
   } catch (error) {
-    console.error('Error adding date range to URL:', error);
+    console.error(`Error in ${method} filtering:`, error);
     return url;
   }
 }

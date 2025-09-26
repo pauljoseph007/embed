@@ -85,8 +85,8 @@ interface DashboardStore {
   currentSheetId: string | null;
   themes: string[];
 
-  // Global date range filter
-  globalDateRange: { from: Date; to: Date } | null;
+  // Sheet-specific date range filters
+  sheetDateRanges: Record<string, { from: Date; to: Date } | null>;
   
   // Actions
   createDashboard: (name: string, theme: string) => Dashboard;
@@ -117,8 +117,9 @@ interface DashboardStore {
   // Demo data
   initializeDemoData: () => void;
 
-  // Global date range filter
-  setGlobalDateRange: (dateRange: { from: Date; to: Date } | null) => void;
+  // Sheet-specific date range filters
+  setSheetDateRange: (sheetId: string, dateRange: { from: Date; to: Date } | null) => void;
+  getSheetDateRange: (sheetId: string) => { from: Date; to: Date } | null;
 
   // Backup and restore
   exportData: () => string;
@@ -226,7 +227,7 @@ export const useDashboardStore = create<DashboardStore>()(
       currentDashboard: null,
       currentSheetId: null,
       themes: THEMES,
-      globalDateRange: null, // Initialize global date range filter
+      sheetDateRanges: {}, // Initialize sheet-specific date range filters
       
       createDashboard: (name: string, theme: string) => {
         try {
@@ -483,7 +484,7 @@ export const useDashboardStore = create<DashboardStore>()(
       },
 
       // Dashboard user management
-      addDashboardUser: (dashboardId: string, user: Omit<DashboardUser, 'id' | 'createdAt'>) => {
+      addDashboardUser: async (dashboardId: string, user: Omit<DashboardUser, 'id' | 'createdAt'>) => {
         set(state => {
           const dashboard = state.dashboards.find(d => d.id === dashboardId);
           if (!dashboard) return state;
@@ -515,6 +516,13 @@ export const useDashboardStore = create<DashboardStore>()(
             currentDashboard: state.currentDashboard?.id === dashboardId ? updatedDashboard : state.currentDashboard
           };
         });
+
+        // Sync to server storage after updating local state
+        try {
+          get().syncToFileStorage();
+        } catch (error) {
+          console.error('Failed to sync dashboard user to server:', error);
+        }
       },
 
       removeDashboardUser: (dashboardId: string, userId: string) => {
@@ -541,6 +549,13 @@ export const useDashboardStore = create<DashboardStore>()(
             currentDashboard: state.currentDashboard?.id === dashboardId ? updatedDashboard : state.currentDashboard
           };
         });
+
+        // Sync to server storage after updating local state
+        try {
+          get().syncToFileStorage();
+        } catch (error) {
+          console.error('Failed to sync dashboard user removal to server:', error);
+        }
       },
 
       updateDashboardUser: (dashboardId: string, userId: string, updates: Partial<DashboardUser>) => {
@@ -744,10 +759,20 @@ export const useDashboardStore = create<DashboardStore>()(
         });
       },
 
-      // Global date range filter
-      setGlobalDateRange: (dateRange: { from: Date; to: Date } | null) => {
-        console.log('Setting global date range:', dateRange);
-        set({ globalDateRange: dateRange });
+      // Sheet-specific date range filters
+      setSheetDateRange: (sheetId: string, dateRange: { from: Date; to: Date } | null) => {
+        console.log('Setting date range for sheet:', sheetId, dateRange);
+        set((state) => ({
+          sheetDateRanges: {
+            ...state.sheetDateRanges,
+            [sheetId]: dateRange
+          }
+        }));
+      },
+
+      getSheetDateRange: (sheetId: string) => {
+        const state = get();
+        return state.sheetDateRanges[sheetId] || null;
       },
 
       // Backup and restore functionality
@@ -801,7 +826,8 @@ export const useDashboardStore = create<DashboardStore>()(
           set({
             dashboards: [],
             currentDashboard: null,
-            currentSheetId: null
+            currentSheetId: null,
+            sheetDateRanges: {}
           });
           localStorage.removeItem('dashboard-store');
         } catch (error) {
@@ -844,11 +870,31 @@ export const useDashboardStore = create<DashboardStore>()(
         try {
           const response = await storageService.getDashboards();
           if (response.success && response.data) {
+            // Parse globalDateRange to ensure dates are Date objects
+            let parsedGlobalDateRange = null;
+            if (response.data.globalDateRange) {
+              try {
+                const dateRange = response.data.globalDateRange;
+                parsedGlobalDateRange = {
+                  from: new Date(dateRange.from),
+                  to: new Date(dateRange.to)
+                };
+                // Validate that the dates are valid
+                if (isNaN(parsedGlobalDateRange.from.getTime()) || isNaN(parsedGlobalDateRange.to.getTime())) {
+                  console.warn('Invalid dates in globalDateRange, resetting to null');
+                  parsedGlobalDateRange = null;
+                }
+              } catch (error) {
+                console.warn('Error parsing globalDateRange:', error);
+                parsedGlobalDateRange = null;
+              }
+            }
+
             set({
               dashboards: response.data.dashboards || [],
               currentDashboard: response.data.currentDashboard || null,
               currentSheetId: response.data.currentSheetId || null,
-              globalDateRange: response.data.globalDateRange || null
+              globalDateRange: parsedGlobalDateRange
             });
             console.log('✅ Dashboard data loaded from file storage');
             return true;

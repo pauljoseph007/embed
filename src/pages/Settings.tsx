@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useAuthStore } from '@/store/authStore';
 import { useTheme } from '@/components/theme/ThemeProvider';
 import { SupersetConfig } from '@/components/settings/SupersetConfig';
+import { ProposalFormConfig } from '@/components/settings/ProposalFormConfig';
 import { toast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import storageService from '@/services/storageService';
@@ -320,12 +321,13 @@ const Settings = () => {
         </div>
 
         <Tabs defaultValue="general" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="general">General</TabsTrigger>
             <TabsTrigger value="notifications">Notifications</TabsTrigger>
             <TabsTrigger value="privacy">Privacy</TabsTrigger>
             {user.role === 'admin' && <TabsTrigger value="users">User Management</TabsTrigger>}
             {user.role === 'admin' && <TabsTrigger value="superset">Superset</TabsTrigger>}
+            {user.role === 'admin' && <TabsTrigger value="proposal-form">Proposal Form</TabsTrigger>}
           </TabsList>
 
           {/* General Settings */}
@@ -844,6 +846,19 @@ const Settings = () => {
                 transition={{ duration: 0.5 }}
               >
                 <SupersetConfig />
+              </motion.div>
+            </TabsContent>
+          )}
+
+          {/* Proposal Form Configuration (Admin Only) */}
+          {user.role === 'admin' && (
+            <TabsContent value="proposal-form">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <ProposalFormConfig />
               </motion.div>
             </TabsContent>
           )}

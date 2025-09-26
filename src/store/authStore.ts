@@ -267,23 +267,42 @@ export const useAuthStore = create<AuthStore>()(
 
       loginToDashboard: async (email: string, password: string) => {
         set({ isLoading: true, error: null });
-        
+
         try {
+          console.log('🔐 Starting login process:', { email, timestamp: new Date().toISOString() });
+
           const response = await storageService.login(email, password);
-          
+
+          console.log('📡 Login API response:', {
+            success: response.success,
+            hasUser: !!response.user,
+            userRole: response.user?.role,
+            userEmail: response.user?.email,
+            dashboardCount: response.dashboards?.length || 0
+          });
+
           if (!response.success || !response.user) {
-            set({ error: 'Invalid email or password', isLoading: false });
+            const errorMsg = response.error || 'Invalid email or password';
+            console.error('❌ Login failed:', errorMsg);
+            set({ error: errorMsg, isLoading: false });
             return {
               success: false,
-              error: 'Invalid email or password'
+              error: errorMsg
             };
           }
 
           const user: User = response.user;
+          console.log('✅ Login successful, setting user state:', {
+            userId: user.id,
+            userEmail: user.email,
+            userRole: user.role
+          });
+
           set({ user, isAuthenticated: true, isLoading: false });
 
           // Store session using storage service
           if (response.session) {
+            console.log('💾 Saving session:', response.session.sessionId);
             storageService.saveSession({
               sessionId: response.session.sessionId,
               userId: user.id,
@@ -295,27 +314,43 @@ export const useAuthStore = create<AuthStore>()(
 
           // Load dashboard data from file storage after successful login
           try {
+            console.log('📊 Loading dashboard data...');
             const { useDashboardStore } = await import('./dashboardStore');
             await useDashboardStore.getState().loadFromFileStorage();
+            console.log('📊 Dashboard data loaded successfully');
           } catch (error) {
-            console.error('Failed to load dashboard data after login:', error);
+            console.error('❌ Failed to load dashboard data after login:', error);
           }
 
-          return {
+          const result = {
             success: true,
             user,
             dashboards: response.dashboards || []
           };
 
+          console.log('🎉 Login process completed successfully:', {
+            userRole: user.role,
+            dashboardCount: result.dashboards.length
+          });
+
+          return result;
+
         } catch (error: any) {
-          console.error('Login error:', error);
-          set({ 
-            error: error.message || 'Login failed. Please try again.', 
-            isLoading: false 
+          console.error('💥 Login error caught:', {
+            error: error,
+            message: error.message,
+            stack: error.stack,
+            name: error.name
+          });
+
+          const errorMessage = error.message || 'Unknown error occurred';
+          set({
+            error: errorMessage,
+            isLoading: false
           });
           return {
             success: false,
-            error: error.message || 'Login failed. Please try again.'
+            error: errorMessage
           };
         }
       },
